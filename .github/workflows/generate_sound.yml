@@ -46,7 +46,7 @@ jobs:
         run: python ooze_dissolve.py
 
       - name: 📤 Upload File WAV
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sounds
           path: |
