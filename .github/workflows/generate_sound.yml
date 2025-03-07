@@ -28,22 +28,22 @@ jobs:
         run: echo "PATH=$PATH:/usr/bin" >> $GITHUB_ENV
 
       - name: 🔊 Run script create open_valve.wav
-        run: python open_valve.py
+        run: python src/open_valve.py
 
       - name: 🔊 Run script create close_valve.wav
-        run: python close_valve.py
+        run: python src/close_valve.py
 
       - name: 🔊 Run script create water_flow.wav
-        run: python water_flow.py
+        run: python src/water_flow.py
         
       - name: 🔊 Run script create oil_flow.wav
-        run: python oil_flow.py
+        run: python src/oil_flow.py
         
       - name: 🔊 Run script create steam_hiss.wav
-        run: python steam_hiss.py
+        run: python src/steam_hiss.py
         
       - name: 🔊 Run script create ooze_dissolve.wav
-        run: python ooze_dissolve.py
+        run: python src/ooze_dissolve.py
 
       - name: 📤 Upload File WAV
         uses: actions/upload-artifact@v4
