@@ -1,13 +1,9 @@
 name: Generate Sounds
 
 on:
-  push:
-    branches:
-      - main
   release:
     types:
       - created
-  workflow_dispatch:  
 
 jobs:
   generate-sounds:
@@ -48,20 +44,7 @@ jobs:
       - name: 🔊 Run script create ooze_dissolve.wav
         run: python src/ooze_dissolve.py
 
-      - name: 📤 Upload File WAV as Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: sounds
-          path: |
-            open_valve.wav
-            close_valve.wav
-            water_flow.wav
-            oil_flow.wav
-            steam_hiss.wav
-            ooze_dissolve.wav
-
       - name: 📦 Upload WAV Files to GitHub Release
-        if: github.event_name == 'release'
         uses: softprops/action-gh-release@v1
         with:
           files: |
