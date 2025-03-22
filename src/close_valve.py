@@ -9,4 +9,4 @@ noise = WhiteNoise().to_audio_segment(duration=500).apply_gain(-25)
 
 final_sound = part1.append(part2, crossfade=50).overlay(noise)
 
-final_sound.export("new_similar_but_different.wav", format="wav")
+final_sound.export("close_valve.wav", format="wav")
