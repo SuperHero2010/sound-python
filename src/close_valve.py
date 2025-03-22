@@ -1,8 +1,12 @@
-from pydub.generators import Sine
+from pydub.generators import Sine, WhiteNoise
 from pydub import AudioSegment
 
-clunk_freq = 1500  
-clunk = Sine(clunk_freq).to_audio_segment(duration=120).apply_gain(-10)
+part1 = Sine(1000).to_audio_segment(duration=300).apply_gain(-5)  # Tần số cao và âm lượng lớn
 
-clunk.export("close_valve.wav", format="wav")
-print("✅ Valve closing sound created: close_valve.wav")
+part2 = Sine(400).to_audio_segment(duration=200).apply_gain(-15)
+
+noise = WhiteNoise().to_audio_segment(duration=500).apply_gain(-25)
+
+final_sound = part1.append(part2, crossfade=50).overlay(noise)
+
+final_sound.export("new_similar_but_different.wav", format="wav")
