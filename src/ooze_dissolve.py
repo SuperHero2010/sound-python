@@ -1,15 +1,12 @@
-from pydub.generators import WhiteNoise, Sine
+from pydub.generators import Sine, WhiteNoise
 from pydub import AudioSegment
 
-hiss = WhiteNoise().to_audio_segment(duration=1200).apply_gain(-20)  # 1.2 giây tiếng xèo
+part1 = Sine(950).to_audio_segment(duration=350).apply_gain(-6)
 
-bubble1 = Sine(600).to_audio_segment(duration=100).apply_gain(-15)
-bubble2 = Sine(500).to_audio_segment(duration=120).apply_gain(-18)
-bubble3 = Sine(450).to_audio_segment(duration=140).apply_gain(-20)
+part2 = Sine(450).to_audio_segment(duration=250).apply_gain(-12)
 
-bubbles = bubble1 + AudioSegment.silent(50) + bubble2 + AudioSegment.silent(80) + bubble3
+noise = WhiteNoise().to_audio_segment(duration=600).apply_gain(-20)
 
-ooze_dissolve = hiss.overlay(bubbles)
+final_sound = part1.append(part2, crossfade=80).overlay(noise)
 
-ooze_dissolve.export("ooze_dissolve.wav", format="wav")
-print("✅ Done creating water eroding ooze sound: ooze_dissolve.wav")
+final_sound.export("ooze_dissolve.wav", format="wav")
