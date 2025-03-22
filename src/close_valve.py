@@ -1,7 +1,7 @@
 from pydub.generators import Sine, WhiteNoise
 from pydub import AudioSegment
 
-part1 = Sine(1000).to_audio_segment(duration=300).apply_gain(-5)  # Tần số cao và âm lượng lớn
+part1 = Sine(1000).to_audio_segment(duration=300).apply_gain(-5)
 
 part2 = Sine(400).to_audio_segment(duration=200).apply_gain(-15)
 
