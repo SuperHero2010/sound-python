@@ -1,9 +1,14 @@
-from pydub.generators import WhiteNoise
+from pydub.generators import Sine, WhiteNoise
 from pydub import AudioSegment
 
-hiss = WhiteNoise().to_audio_segment(duration=1000).apply_gain(-15)  # 1 giây tiếng xì
+part1 = Sine(1500).to_audio_segment(duration=500).apply_gain(-10).fade_in(100)
 
-hiss_effect = hiss.fade_in(100).fade_out(200)
+part2_sine = Sine(300).to_audio_segment(duration=1500).apply_gain(-15)
+part2_noise = WhiteNoise().to_audio_segment(duration=1500).apply_gain(-25)
+part2 = part2_sine.overlay(part2_noise)
 
-hiss_effect.export("steam_hiss.wav", format="wav")
-print("✅ Done creating the hissing steam sound: steam_hiss.wav")
+part3 = Sine(500).to_audio_segment(duration=500).apply_gain(-20).fade_out(100)
+
+final_sound = part1.append(part2, crossfade=100).append(part3, crossfade=100)
+
+final_sound.export("steam_hiss.wav", format="wav")
