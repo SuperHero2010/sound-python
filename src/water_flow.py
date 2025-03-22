@@ -1,7 +1,10 @@
-from pydub.generators import Sine
+from pydub.generators import WhiteNoise, Sine
 from pydub import AudioSegment
 
-water_flow = Sine(300).to_audio_segment(duration=1000).apply_gain(-25).fade_in(200).fade_out(200)
+noise = WhiteNoise().to_audio_segment(duration=900).apply_gain(-20)
 
-water_flow.export("water_flow.wav", format="wav")
-print("✅ Water sound created: water_flow.wav")
+sine_wave = Sine(200).to_audio_segment(duration=900).apply_gain(-35)
+
+flowing_water = noise.overlay(sine_wave)
+
+flowing_water.export("water_flow.wav", format="wav")
